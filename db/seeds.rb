@@ -52,7 +52,7 @@ Review.create([
     {user_id: User.third.id, app_id: App.third.id, content: "We don't like Facebook!", rating: 5}
 ])
 
-
+r1 = Review.create
 
 # binding.pry
 
