@@ -34,6 +34,7 @@ u3 = User.third
 #App
 
 App.create([
+    {name: "Macebook", app_function: "Mocial media company"},
     {name: "Facebook", app_function: "Social media company"},
     {name: "Yelp", app_function: "Reviewing food and restaurants"}, 
     {name: "Instagram", app_function: "Posting and commenting on photos"}
