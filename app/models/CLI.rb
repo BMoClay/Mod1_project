@@ -92,7 +92,7 @@ class CLI
             prompt.choice "See All Apps"
             prompt.choice "Edit A Review"
             prompt.choice "Change A Rating"
-            promt.choice "Rate An App"
+            prompt.choice "Rate An App"
             prompt.choice "Logout"
         end
         case intro_screen
