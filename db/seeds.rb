@@ -24,12 +24,15 @@ User.create([
     {username: "Josh"},
     {username: "Maggie"},
     {username: "Dakota"},
-    {username: "Stella"}
+    {username: "Sam"},
+    {username: "Sara"},
+    {username: "tom"},
+    {username: "Steve"}
 ])
 
-u1 = User.first
-u2 = User.second
-u3 = User.third
+# u1 = User.first
+# u2 = User.second
+# u3 = User.third
 
 #App
 
@@ -37,23 +40,30 @@ App.create([
     {name: "Macebook", app_function: "Mocial media company"},
     {name: "Facebook", app_function: "Social media company"},
     {name: "Yelp", app_function: "Reviewing food and restaurants"}, 
-    {name: "Instagram", app_function: "Posting and commenting on photos"}
+    {name: "Instagram", app_function: "Posting and commenting on photos"},
+    {name: "Seamless", app_function: "orders food from restaurants"},
+    {name: "Google Maps", app_function: "Map w driving directions"}, 
+    {name: "Spotify", app_function: "Music app"}, 
+    {name: "Tinder", app_function: "dating app"}, 
 ])
 
-a1 = App.first
-a2 = App.second
-a3 = App.third
+# a1 = App.first
+# a2 = App.second
+# a3 = App.third
 
 
 #Review
 
 Review.create([
     {user_id: User.first.id, app_id: App.first.id, content: "We don't like Facebook!", rating: 1}, 
-    {user_id: User.second.id, app_id: App.second.id, content: "We don't like Facebook!", rating: 4},
+    # {user: User.second, app: App.second, content: "We don't like Facebook!", rating: 4},
     {user_id: User.third.id, app_id: App.third.id, content: "We don't like Facebook!", rating: 5}
 ])
 
+User.all.map{|each_user| Review.create({user_id: each_user.id, app_id: App.all.sample.id, content: "We like it", rating: 1})}
 
+
+# 5.times do {Review.create{user: User.all.sample}}
 
 # binding.pry
 
