@@ -4,7 +4,6 @@ require 'pry'
 
 class CLI
 
-
     def self.tty_prompt
         TTY::Prompt.new 
     end
@@ -87,30 +86,41 @@ class CLI
         #self.logo
         puts "Welcome #{@user.username}!" 
         intro_screen = self.tty_prompt.select("Main Menu") do |prompt| 
-            prompt.choice "Read A Review"
-            prompt.choice "Write A Review"
             prompt.choice "See All Apps"
-            prompt.choice "Edit A Review"
-            prompt.choice "Change A Rating"
-            prompt.choice "Rate An App"
+            prompt.choice "Read A Review"
+            prompt.choice "Rate an App and Write A Review"
+            prompt.choice "Edit A Review or Change Rating"
             prompt.choice "Logout"
         end
         case intro_screen
+            when "See All Apps"
+                self.see_all_apps    
             when "Read A Review" 
                 self.read_a_review
-            when "Write A Review"
-                self.write_a_review 
-            when "See All Apps"
-                self.see_all_apps
-            when "Edit A Review"
-                self.edit_a_review
-            when "Change A Rating"
-                self.change_a_rating
-            when "Rate An App"
-                self.rate_an_app
+            when "Rate an App and Write A Review"
+                self.rate_write_a_review 
+            when "Edit A Review or Change Rating"
+                self.edit_a_review_or_rating
             when "Logout"
                 system('clear')
                 self.main_menu
+        end
+    end
+
+    def self.write_a_review
+        prompt = TTY::Prompt.new
+        intro_screen = self.tty_prompt.select("Write A Review") do |prompt|
+        puts "What app would you like to review?"
+        prompt.choice "#{App.first.name}"
+        prompt.choice "#{App.second.name}"
+        prompt.choice "#{App.third.name}"
+        end
+            if intro_screen == "Facebook" 
+            prompt.ask "Rate the app between 1 and 10" 
+                rating = gets.chomp 
+            prompt.ask "Write a review"
+                content = gets.chomp
+                r4 = Review.create(user: @user, app: App.first, content: content, rating: rating)
         end
     end
 
