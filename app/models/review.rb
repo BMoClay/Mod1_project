@@ -5,9 +5,7 @@ require_relative 'cli.rb'
 class Review < ActiveRecord::Base
     
     belongs_to :user
-    belongs_to :app
-
-   
+    belongs_to :app   
 
 
 
