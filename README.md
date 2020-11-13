@@ -1,24 +1,19 @@
-# Agenda
-- What are APIs?
-    - define an interface to someone else's application
-    - send requests (just like we do in the browser) and get data back
-- High level HTTP and HTTP Verbs; How those relate to CRUD
-    - HTTP is the protocol we use to make requests (deeper dive in Mod2)
-    CRUD ---- HTTP 
-    Create ---- POST (create something entirely new)
-    *** youre gonna use this one a lot!!! *** Read ---- GET (just want to retrieve some info)
-    Update ---- PUT / PATCH 
-    Delete ---- DELETE (...self explanatory)
+App Quest
 
-- Different Types of APIs
-- Gem's you'll need
-- Make requests in our little jeopardy-ish app. Action Items (AIs) below:
-  - Initial request to seed categories 
-  - Break & Review starter code for CLI
-  - Request during CLI behavior to get category's questions 
+An app to help people review other apps on the web.
+
+How to use:
+Open terminal and enter 'bundle install' then after that enter 'bin/run.rb'
+
+Project Function Overview
+Create new user by entereing a username and a password.
+Navigate using up and down arrow keys to select something from the Main Menu
+You can write a review, read a review.
+
+Application Specs
+
+Text Editor - VsCod
+Gems - ActiveRecord, Sinatra, 
 
 
-
-## Resources
-<!-- - [jservice trivia](http://jservice.io/) -->
 
