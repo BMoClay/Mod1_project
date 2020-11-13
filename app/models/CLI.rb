@@ -71,14 +71,19 @@ class CLI
         if splash == "Yes"
             @user.destroy
             puts "Your account has been deleted" 
+            sleep(2)
+            system('clear')
+            self.main_menu
         elsif splash == "No"
+            system('clear')
+            sleep(2)
             self.login_main_menu
         end 
     end 
 
     def  self.back_to_main_menu
         prompt = TTY::Prompt.new
-        splash = prompt.select("Go Back") do |prompt|
+        splash = prompt.select(" ") do |prompt|
             prompt.choice "Back to Main Menu"
         end
         if splash == "Back to Main Menu"
@@ -92,16 +97,16 @@ class CLI
         puts "Welcome #{@user.username}!" 
         intro_screen = self.tty_prompt.select("Main Menu") do |prompt| 
             prompt.choice "Write A Review"
-            prompt.choice "Read A Review"
+            prompt.choice "Read Your Reviews"
             prompt.choice "Change Username"
             prompt.choice "Logout"
             prompt.choice "Delete Account"
         end
         case intro_screen
-            when "Read A Review" 
-                self.read_a_review
             when "Write A Review"
-                self.write_a_review 
+                self.write_a_review
+            when "Read Your Reviews" 
+                self.read_a_review 
             when "Change Username"
                 self.change_name
             when "Logout"
@@ -128,7 +133,8 @@ class CLI
                  puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    self.back_to_main_menu
+                    system('clear')
+                    self.login_main_menu
             elsif
                 intro_screen == "Yelp" 
                 rating = prompt.ask ("Rate the app between 1 and 10").strip 
@@ -137,7 +143,8 @@ class CLI
                     puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    self.back_to_main_menu
+                    system('clear')
+                    self.login_main_menu
             else
                 intro_screen == "Instagram" 
                 rating = prompt.ask ("Rate the app between 1 and 10").strip 
@@ -146,7 +153,8 @@ class CLI
                     puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    self.back_to_main_menu
+                    system('clear')
+                    self.login_main_menu
             end 
         end
     
