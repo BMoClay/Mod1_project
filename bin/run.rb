@@ -15,4 +15,4 @@ CLI.main_menu
 # CLI.rate_an_app
 
 
-binding.pry
+# binding.pry

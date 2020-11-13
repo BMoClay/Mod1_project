@@ -19,17 +19,17 @@ App.destroy_all
 
 
 # Users
-User.create([
-    {username: "Ben"},
-    {username: "Josh"},
-    {username: "Maggie"},
-    {username: "Dakota"},
-    {username: "Stella"}
-])
+# User.create([
+#     {username: "Ben"},
+#     {username: "Josh"},
+#     {username: "Maggie"},
+#     {username: "Dakota"},
+#     {username: "Stella"}
+# ])
 
-u1 = User.first
-u2 = User.second
-u3 = User.third
+# u1 = User.first
+# u2 = User.second
+# u3 = User.third
 
 #App
 
@@ -48,13 +48,13 @@ a3 = App.third
 
 #Review
 
-Review.create([
-    {user_id: User.first.id, app_id: App.first.id, content: "We don't like Facebook!", rating: 1}, 
-    {user_id: User.second.id, app_id: App.second.id, content: "We don't like Facebook!", rating: 4},
-    {user_id: User.third.id, app_id: App.third.id, content: "We don't like Facebook!", rating: 5}
-])
+# Review.create([
+#     {user_id: User.first.id, app_id: App.first.id, content: "We don't like Facebook!", rating: 1}, 
+#     {user_id: User.second.id, app_id: App.second.id, content: "We don't like Facebook!", rating: 4},
+#     {user_id: User.third.id, app_id: App.third.id, content: "We don't like Facebook!", rating: 5}
+# ])
 
-r1 = Review.create
+# r1 = Review.create
 
 # binding.pry
 

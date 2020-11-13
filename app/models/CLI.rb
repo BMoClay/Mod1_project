@@ -54,6 +54,8 @@ class CLI
     def self.change_name
         prompt = self.tty_prompt
         new_name = prompt.ask("New Username:").strip
+        @user.username = new_name
+        @user.save
         puts "Your new username is #{new_name}!"
         sleep(3)
         system('clear')
@@ -70,7 +72,7 @@ class CLI
             @user.destroy
             puts "Your account has been deleted" 
         elsif splash == "No"
-            self.back_to_main_menu
+            self.login_main_menu
         end 
     end 
 
@@ -91,7 +93,6 @@ class CLI
         intro_screen = self.tty_prompt.select("Main Menu") do |prompt| 
             prompt.choice "Write A Review"
             prompt.choice "Read A Review"
-            prompt.choice "Edit A Review"
             prompt.choice "Change Username"
             prompt.choice "Logout"
             prompt.choice "Delete Account"
@@ -101,8 +102,6 @@ class CLI
                 self.read_a_review
             when "Write A Review"
                 self.write_a_review 
-            when "Edit A Review"
-                self.edit_a_review
             when "Change Username"
                 self.change_name
             when "Logout"
@@ -124,42 +123,51 @@ class CLI
             if intro_screen == "Facebook" 
             rating = prompt.ask ("Rate the app between 1 and 10").strip 
                 content = prompt.ask ("Write a review").strip
-                 Review.create({user: @user, app: App.first, content: content, rating: rating})
+                # binding.pry
+                @user.rate_app(App.first, rating, content)
                  puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    main_menu
+                    self.back_to_main_menu
             elsif
                 intro_screen == "Yelp" 
                 rating = prompt.ask ("Rate the app between 1 and 10").strip 
                 content = prompt.ask ("Write a review").strip       
-                    Review.create({user: @user, app: App.second, content: content, rating: rating})
+                @user.rate_app(App.second, rating, content)
                     puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    main_menu
+                    self.back_to_main_menu
             else
                 intro_screen == "Instagram" 
                 rating = prompt.ask ("Rate the app between 1 and 10").strip 
-                content = prompt.ask ("Write a review").strip      
-                    Review.create({user: @user, app: App.third, content: content, rating: rating})                   
-            puts "Your review has been created :)"
+                content = prompt.ask ("Write a review").strip
+                   @user.rate_app(App.third, rating, content)    
+                    puts "Your review has been created :)"
                     sleep (2)
                     puts "Taking you back to the main menu.."
-                    self.login_main_menu
+                    self.back_to_main_menu
             end 
         end
     
     def self.read_a_review
+        @user.reload
         prompt = TTY::Prompt.new
         puts "Which review would you like to read?"
-            intro_screen = self.tty_prompt.select("Reviews") do |prompt|
-            prompt.choice "#{@user.username}'s review"
+        intro_screen = self.tty_prompt.select("Reviews") do |prompt|
+            @user.reviews.each do |review|
+                prompt.choice "#{review.app.name} review"
+            end
         end 
-        case intro_screen
-            when "#{@user.username}'s review'"
-            User.all.reviews{|r| r.user == self}
-        end
+        this_review = @user.reviews.find{|review| intro_screen.include?(review.app.name)}
+        # binding.pry
+            if intro_screen = "#{this_review.app.name} review"
+                this_review.reload
+                puts this_review.rating 
+                puts this_review.content
+            end
+            self.back_to_main_menu
     end
+
 end
 
